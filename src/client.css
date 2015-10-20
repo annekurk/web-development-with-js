@@ -4,5 +4,32 @@ h1 {
     color: $red
 }
 
+body {
+
+    margin-top: 30%;
+}
+
+.tussi {
+    margin-top: 20px;
+    padding: 20px 10px;
+
+    background-color: pink;
+
+    button {
+            margin-left: 50px;
+    }
+}
+
+.megalaskuri{
+    position: absolute;
+    top:0;
+    width:90%;
+    text-align: center;
+    background-color: pink;
+    padding: 5%;
+    font-size: 7em;
+    color: #eec9e7;
+}
+
 
 
