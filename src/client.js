@@ -3,101 +3,33 @@ import'./client.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { Router, Route, Link, IndexRoute } from 'react-router';
 
-function getTussit(){
-    return axios.get('/api/tussi').then((response) => {
-        return response.data;
-    });
-}
+import Index from './components/Index';
+//import HelloWorld from './components/HelloWorld';
+//import Counterizer from './components/Counterizer';
+import Counter from './components/Counter';
+import HelloWorldApp from './components/HelloWorldApp';
+import Greeter from './components/Greeter';
+
 
 //const tussit = getTussit();
 
 //tussit.then((data) => console.log(data));
 
-const HelloWorld = React.createClass({
-    render: function() {
-        return (
-            <div>
-                Hello {this.props.name}
-            </div>
-            );
-    }
-});
-
-const Counterizer = React.createClass({
 
 
-    render: function() {
-        return (
-            <div className="tussi">
-                {this.props.count}
-
-                <button onClick={this.props.incrementCounter}>
-                MOAR!
-                </button>
-            </div>
-        );
-    },
-
-})
-
-const MegaCounterizer = React.createClass({
-
-
-    render: function() {
-        return (
-            <div className="megalaskuri">
-                {this.props.count}
-
-            </div>
-        );
-    },
-
-})
-
-const HelloWorldApp = React.createClass({
-        getInitialState: function() {
-        return {
-            count: 0,
-            name:'Pekkis',
-            names: []
-        };
-    },
-
-    componentDidMount: function() {
-        getTussit().then((data) => {
-            this.setState({
-                names: data
-            });
-        });
-    },
-
-    render: function() {
-        const names = this.state.names;
-
-        return (
-            <div>
-                <h1>Lusso</h1>
-
-               {names.map((name, i) => {
-                    return <HelloWorld key={i} name={name}/>;
-                })
-            }
-
-               <Counterizer count={this.state.count} incrementCounter={this.incrementCounter} />
-                <MegaCounterizer count={this.state.count}/>
-            </div>
-        );
-    },
-            incrementCounter: function () {
-        this.setState({
-            count: this.state.count + 1
-        });
-    }
-});
+const routes = (
+    <Router>
+        <Route path="/" component={HelloWorldApp}>
+            <IndexRoute component={Index}></IndexRoute>
+            <Route path="/hello/:name" component={Greeter}></Route>
+        </Route>
+    </Router>
+);
 
 ReactDOM.render(
-    <HelloWorldApp />,
+    routes,
     document.getElementById('app')
     );
 
